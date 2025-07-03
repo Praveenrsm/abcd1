@@ -1,0 +1,15 @@
+D:\Projects\FarmTrade\string learning\bin\Debug\net8.0\string learning.exe
+D:\Projects\FarmTrade\string learning\bin\Debug\net8.0\string learning.deps.json
+D:\Projects\FarmTrade\string learning\bin\Debug\net8.0\string learning.runtimeconfig.json
+D:\Projects\FarmTrade\string learning\bin\Debug\net8.0\string learning.dll
+D:\Projects\FarmTrade\string learning\bin\Debug\net8.0\string learning.pdb
+D:\Projects\FarmTrade\string learning\obj\Debug\net8.0\string learning.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\FarmTrade\string learning\obj\Debug\net8.0\string learning.AssemblyInfoInputs.cache
+D:\Projects\FarmTrade\string learning\obj\Debug\net8.0\string learning.AssemblyInfo.cs
+D:\Projects\FarmTrade\string learning\obj\Debug\net8.0\string learning.csproj.CoreCompileInputs.cache
+D:\Projects\FarmTrade\string learning\obj\Debug\net8.0\string learning.sourcelink.json
+D:\Projects\FarmTrade\string learning\obj\Debug\net8.0\string learning.dll
+D:\Projects\FarmTrade\string learning\obj\Debug\net8.0\refint\string learning.dll
+D:\Projects\FarmTrade\string learning\obj\Debug\net8.0\string learning.pdb
+D:\Projects\FarmTrade\string learning\obj\Debug\net8.0\string learning.genruntimeconfig.cache
+D:\Projects\FarmTrade\string learning\obj\Debug\net8.0\ref\string learning.dll

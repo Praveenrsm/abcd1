@@ -1,0 +1,31 @@
+D:\Projects\FarmTrade\mvc practice\bin\Debug\net8.0\appsettings.Development.json
+D:\Projects\FarmTrade\mvc practice\bin\Debug\net8.0\appsettings.json
+D:\Projects\FarmTrade\mvc practice\bin\Debug\net8.0\mvc practice.staticwebassets.runtime.json
+D:\Projects\FarmTrade\mvc practice\bin\Debug\net8.0\mvc practice.exe
+D:\Projects\FarmTrade\mvc practice\bin\Debug\net8.0\mvc practice.deps.json
+D:\Projects\FarmTrade\mvc practice\bin\Debug\net8.0\mvc practice.runtimeconfig.json
+D:\Projects\FarmTrade\mvc practice\bin\Debug\net8.0\mvc practice.dll
+D:\Projects\FarmTrade\mvc practice\bin\Debug\net8.0\mvc practice.pdb
+D:\Projects\FarmTrade\mvc practice\obj\Debug\net8.0\mvc practice.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\FarmTrade\mvc practice\obj\Debug\net8.0\mvc practice.AssemblyInfoInputs.cache
+D:\Projects\FarmTrade\mvc practice\obj\Debug\net8.0\mvc practice.AssemblyInfo.cs
+D:\Projects\FarmTrade\mvc practice\obj\Debug\net8.0\mvc practice.csproj.CoreCompileInputs.cache
+D:\Projects\FarmTrade\mvc practice\obj\Debug\net8.0\mvc practice.MvcApplicationPartsAssemblyInfo.cache
+D:\Projects\FarmTrade\mvc practice\obj\Debug\net8.0\mvc practice.RazorAssemblyInfo.cache
+D:\Projects\FarmTrade\mvc practice\obj\Debug\net8.0\mvc practice.RazorAssemblyInfo.cs
+D:\Projects\FarmTrade\mvc practice\obj\Debug\net8.0\mvc practice.sourcelink.json
+D:\Projects\FarmTrade\mvc practice\obj\Debug\net8.0\staticwebassets.build.json
+D:\Projects\FarmTrade\mvc practice\obj\Debug\net8.0\staticwebassets.development.json
+D:\Projects\FarmTrade\mvc practice\obj\Debug\net8.0\staticwebassets\msbuild.mvc practice.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Projects\FarmTrade\mvc practice\obj\Debug\net8.0\staticwebassets\msbuild.build.mvc practice.props
+D:\Projects\FarmTrade\mvc practice\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.mvc practice.props
+D:\Projects\FarmTrade\mvc practice\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.mvc practice.props
+D:\Projects\FarmTrade\mvc practice\obj\Debug\net8.0\staticwebassets.pack.json
+D:\Projects\FarmTrade\mvc practice\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+D:\Projects\FarmTrade\mvc practice\obj\Debug\net8.0\scopedcss\bundle\mvc practice.styles.css
+D:\Projects\FarmTrade\mvc practice\obj\Debug\net8.0\scopedcss\projectbundle\mvc practice.bundle.scp.css
+D:\Projects\FarmTrade\mvc practice\obj\Debug\net8.0\mvc practice.dll
+D:\Projects\FarmTrade\mvc practice\obj\Debug\net8.0\refint\mvc practice.dll
+D:\Projects\FarmTrade\mvc practice\obj\Debug\net8.0\mvc practice.pdb
+D:\Projects\FarmTrade\mvc practice\obj\Debug\net8.0\mvc practice.genruntimeconfig.cache
+D:\Projects\FarmTrade\mvc practice\obj\Debug\net8.0\ref\mvc practice.dll

@@ -1,0 +1,27 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<!-- Links/buttons to call handlers -->
+<a asp-page="./Index" asp-route-handler="Download">Download File</a> |
+<a asp-page="./Index" asp-route-handler="Json">Get JSON</a> |
+<a asp-page="./Index" asp-route-handler="Content">Get Text Content</a> |
+<a asp-page="./Index" asp-route-handler="Redirect">Go to Privacy Page</a>
+<a asp-page-handler="Download">Download PDF</a>
+
+<hr />
+
+<!-- Show JSON result or Content in page -->
+@if (Model.JsonResult != null)
+{
+    <h3>JSON Result:</h3>
+    <pre>@Model.JsonResult</pre>
+}
+else if (!string.IsNullOrEmpty(Model.ContentResult))
+{
+    <h3>Content Result:</h3>
+    <p>@Model.ContentResult</p>
+}

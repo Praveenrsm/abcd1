@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "V/i7Kp0mqqA=",
+  "success": true,
+  "projectFilePath": "D:\\Projects\\FarmTrade\\string learning\\string learning.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\praveen.rajendran\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.21.0\\microsoft.visualstudio.azure.containers.tools.targets.1.21.0.nupkg.sha512"
+  ],
+  "logs": []
+}
