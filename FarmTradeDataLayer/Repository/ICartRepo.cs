@@ -11,6 +11,6 @@ namespace FarmTradeDataLayer.Repository
     {
         void AddToCart(Cart cartItem, Guid? userId);
         IEnumerable<Cart> GetCartDetails(Guid? id);
-        void UpdateQuantity(int productId,int Quantity,Guid? userId);
+        void UpdateQuantity(int productId,Guid? userId,int Quantity);
     }
 }

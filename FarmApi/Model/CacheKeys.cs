@@ -1,7 +1,7 @@
 ﻿namespace FarmApi.Model
 {
-    public class CacheKeys
+    public static class CacheKeys
     {
-        public static string User = "User";
+        public const string User = "User";
     }
 }

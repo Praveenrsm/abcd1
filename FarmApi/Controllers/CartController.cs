@@ -2,6 +2,7 @@
 using FarmTradeEntity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace FarmApi.Controllers
 {
@@ -17,8 +18,13 @@ namespace FarmApi.Controllers
             _userCartService = userCartService;
         }
         [HttpPost("AddCart")]
-        public IActionResult AddToCart([FromBody] Cart cart,Guid? userId)
+        public IActionResult AddToCart([FromBody] Cart cart)
         {
+            Guid? userId = null;
+
+            var claim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            if (claim != null)
+                userId = Guid.Parse(claim.Value);
             _cartService.AddToCart(cart,userId);
             return Ok(cart);
         }
@@ -29,9 +35,16 @@ namespace FarmApi.Controllers
         //    return Ok(cart);
         //}
         [HttpPut("UpdateQuantity")]
-        public IActionResult EditToCart(int productId,int quantity,Guid? userId)
+        public IActionResult EditToCart(int productId,int quantity)
         {
-            _cartService.UpdateQuantity(productId, quantity, userId);
+            Guid? userId = null;
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (userIdClaim == null)
+                return Unauthorized("Invalid or expired token");
+
+            userId = Guid.Parse(userIdClaim.Value);
+            _cartService.UpdateQuantity(productId, userId,quantity);
             return Ok("cart Details updated successfully");
         }
         //[HttpPut("UpdateUserQuantity")]
@@ -41,9 +54,14 @@ namespace FarmApi.Controllers
         //    return Ok("cart Details for a user updated successfully");
         //}
         [HttpGet("GetCart")]
-        public IEnumerable<Cart> GetCarts(Guid? id)
+        public IEnumerable<Cart> GetCarts()
         {
-            return _cartService.GetCartDetails(id);
+            Guid? userId = null;
+
+            var claim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            if (claim != null)
+                userId = Guid.Parse(claim.Value);
+            return _cartService.GetCartDetails(userId);
         }
         //[HttpGet("GetUserCart")]
         //public IEnumerable<Cart> GetCarts(Guid userId)

@@ -20,57 +20,87 @@ namespace FarmBusiness.Services
             _orderRepo = orderRepo;
             _context = context;
         }
-        public void PlaceOrder(Guid userId,int addressId1)
+
+        public void CancelOrder(int orderId, Guid userId)
         {
-            // Create new order
+            _orderRepo.UpdateOrderStatus(orderId, userId, OrderStatus.cancelled);
+        }
+
+
+        public OrderDetails GetOrderDetails(int orderId,Guid userId)
+        {
+           return _orderRepo.GetOrderDetails(orderId,userId);
+        }
+        public int PlaceOrder(Guid userId, int addressId)
+        {
             var order = new Order
             {
                 userId = userId,
-                orderDate = DateTime.Now,
-                addressId = addressId1
+                addressId = addressId,
+                PaymentMethod = "Cash On Delivery"
             };
 
-            _orderRepo.AddOrder(order);
+            // 🔑 Capture returned order WITH Id
+            var createdOrder = _orderRepo.AddOrder(order);
 
-            // Move cart items to order items
-            var cartItems = _context.cart.Where(c => c.userId == userId).ToList();
+            if (createdOrder == null)
+                throw new Exception("Order creation failed");
+
+            var cartItems = _context.cart
+                .Where(c => c.userId == userId)
+                .ToList();
+
             foreach (var item in cartItems)
             {
+                var productPrice = _context.product
+                    .Where(p => p.ProductId == item.productId)
+                    .Select(p => p.productPrice)
+                    .First();
+
                 var orderItem = new OrderItem
                 {
-                    OrderId = order.Id,
+                    OrderId = createdOrder.Id,
                     productId = item.productId,
                     Quantity = item.Quantity,
-                    UnitPrice = item.totalPrice
+                    UnitPrice = productPrice,                    // ✅ ONE unit price
+                    TotalPrice = productPrice * item.Quantity    // ✅ correct total
                 };
+
                 _context.orderItem.Add(orderItem);
             }
 
-            // Clear the cart after placing the order
             _context.cart.RemoveRange(cartItems);
             _context.SaveChanges();
 
-            // Notify suppliers about the new order
-            NotifySuppliers(order.Id);
+            NotifySuppliers(createdOrder.Id);
+            return createdOrder.Id;
         }
+
 
         private void NotifySuppliers(int orderId)
         {
-            var orderItems = _context.orderItem.Where(oi => oi.OrderId == orderId).ToList();
-            var suppliers = _context.product.Include(p => p.User)
-                .Where(s => orderItems.Select(oi => oi.productId).Contains(s.ProductId))
+            var orderItems = _context.orderItem
+                .Where(oi => oi.OrderId == orderId)
+                .ToList();
+
+            var suppliers = _context.product
+                .Include(p => p.User)
+                .Where(p => orderItems.Select(oi => oi.productId).Contains(p.ProductId))
                 .ToList();
 
             foreach (var supplier in suppliers)
             {
-                // Customize your message
-                string subject = $"New Order #{orderId} Notification";
+                // ✅ SAFETY CHECK
+                if (supplier.User == null || string.IsNullOrEmpty(supplier.User.Email))
+                    continue; // skip silently
+
+                string subject = $"New Order #{orderId}";
                 string body = BuildOrderNotificationEmailBody(supplier, orderId, orderItems);
 
-                // Send email
                 SendEmail(supplier.User.Email, subject, body);
             }
         }
+
         private string BuildOrderNotificationEmailBody(Product supplier, int orderId, List<OrderItem> orderItems)
         {
             var sb = new StringBuilder();
@@ -116,7 +146,7 @@ namespace FarmBusiness.Services
                 IsBodyHtml = false,
             };
 
-            mailMessage.To.Add("praveen.rajendran@valtech.com");
+            mailMessage.To.Add(recipientEmail);
 
             try
             {

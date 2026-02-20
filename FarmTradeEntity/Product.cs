@@ -23,9 +23,9 @@ namespace FarmTradeEntity
         public string Description { get; set; }
         public int availableQuantity { get; set; }
         [ForeignKey("User")]
-        public Guid userId { get; set; }
+        public Guid? userId { get; set; }
 
-        public User User { get; set; }
+        public User? User { get; set; }
         public ICollection<ReviewsAndRatings> Reviews { get; set; } = new List<ReviewsAndRatings>();
         public ICollection<ProductImage> ProductImages { get; set; } = new List<ProductImage>(); // Collection for multiple images
     }

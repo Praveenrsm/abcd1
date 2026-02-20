@@ -16,4 +16,8 @@ export class ContactComponent {
   submitForm() {
     alert(`Name: ${this.name}\nEmail: ${this.email}\nMessage: ${this.message}`);
   }
+  // closePopup() {
+  //   // Your logic
+  //   console.log("Popup closed");
+  // }
 }

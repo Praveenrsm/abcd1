@@ -12,8 +12,9 @@ namespace FarmTradeDataLayer.Repository
         //void UpdateRR(ReviewsAndRatings rr);
         //string AddRR(ReviewsAndRatings rr);
         //ReviewsAndRatings GetRRById(int rRId);
-        //IEnumerable<ReviewsAndRatings> GetRRs();
+        Task<IEnumerable<ReviewsAndRatings>> GetAllReview();
         void DeleteRR(int rRId);
-        void AddOrUpdateReview(int productId, Guid userId, string comments, int rating);
+        void AddOrUpdateReview(int productId, Guid userId,string comments, int rating);
+
     }
 }

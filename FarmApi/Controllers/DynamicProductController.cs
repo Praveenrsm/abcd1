@@ -20,28 +20,23 @@ namespace FarmApi.Controllers
         public IActionResult AddDynamicProduct([FromBody] Product1 Dynamic)
         {
             if (Dynamic == null)
-            {
-                return BadRequest("Invalid product data.");
-            }
+                return BadRequest("Invalid product data");
 
-            var product = _DynamicProductConetxt.product.FirstOrDefault(p => p.ProductId == Dynamic.ProductId);
-
-            // Check if product already exists
-            if (product != null)
-            {
-                return Conflict("Product with this ID already exists.");
-            }
-
-            _DynamicProductConetxt.product.Add(Dynamic);
+            _DynamicProductConetxt.products.Add(Dynamic);
             _DynamicProductConetxt.SaveChanges();
 
-            return Ok("Success");
+            // AFTER SaveChanges → ProductId is generated
+            return Ok(new
+            {
+                message = "Product added successfully",
+                productId = Dynamic.ProductId
+            });
         }
 
         [HttpGet("GetDynamicProduct")]
         public IEnumerable<Product1> GetDynamicProducts()
         {
-            return _DynamicProductConetxt.product.ToList();
+            return _DynamicProductConetxt.products.ToList();
         }
         [HttpPut("UpdateDynamicProduct")]
         public IActionResult UpdateDynamicProduct([FromBody] Product1 dynamic)
@@ -56,18 +51,31 @@ namespace FarmApi.Controllers
         public IActionResult DeleteDynamicProduct(int productId)
         {
             #region DELETE Dynamic Product
-            var productDelete = _DynamicProductConetxt.product.Find(productId);
-            _DynamicProductConetxt.product.Remove(productDelete);
+            var productDelete = _DynamicProductConetxt.products.Find(productId);
+            _DynamicProductConetxt.products.Remove(productDelete);
             _DynamicProductConetxt.SaveChanges();
             return Ok(productDelete.ProductId + "Deleted Successfully");
             #endregion
         }
-        [HttpGet("GetDynamicProductById")]
+        //[HttpGet("GetDynamicProductById")]
+        //public IActionResult GetDynamicProductById(int id)
+        //{
+        //    var result = _DynamicProductConetxt.products.ToList();
+        //    var GetAProduct = result.Where(obj => obj.ProductId == id).FirstOrDefault();
+        //    return Ok(GetAProduct);
+        //}
+
+        [HttpGet("GetDynamicProductById/{id}")]
         public IActionResult GetDynamicProductById(int id)
         {
-            var result = _DynamicProductConetxt.product.ToList();
-            var GetAProduct = result.Where(obj => obj.ProductId == id).FirstOrDefault();
-            return Ok(GetAProduct);
+            var product = _DynamicProductConetxt.products
+                .FirstOrDefault(p => p.ProductId == id);
+
+            if (product == null)
+                return NotFound();
+
+            return Ok(product);
         }
+
     }
 }

@@ -10,11 +10,11 @@ namespace FarmTradeDataLayer.Repository
 {
     public interface IUserRepository
     {
-        void Updateuser(User user);
+        Task Updateuser(User user);
         Task Adduser(User user);
-        string Login(User user);
-        User GetUserById(Guid userId);
-        IEnumerable<User> Getusers(int pageNumber, int pageSize);
-        void DeleteUser(Guid userId);
+        Task<User> Login(string Email);
+        Task<User> GetUserById(Guid userId);
+        Task<IEnumerable<User>> Getusers(int pageNumber, int pageSize);
+        Task DeleteUser(Guid userId);
     }
 }

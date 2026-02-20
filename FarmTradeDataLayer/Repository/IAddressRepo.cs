@@ -9,8 +9,8 @@ namespace FarmTradeDataLayer.Repository
 {
     public interface IAddressRepo
     {
-        void AddAddress(Address address);
-        IEnumerable<Address> GetAddress();
+        Task AddAddress(Address address,Guid userId);
+        IEnumerable<Address> GetAddress(Guid userId);
         void UpdateAddress(Address address);
         void DeleteAddress(int addressId);
         Address GetAddressById(int addressId);

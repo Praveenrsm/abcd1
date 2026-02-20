@@ -1,0 +1,27 @@
+.order-details-page {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+.order-summary,
+.address-card,
+.order-total {
+  background: #f8f9fa;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+}
+
+.order-items {
+  margin-top: 20px;
+}
+
+.order-item {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.product-name {
+  font-weight: bold;
+}

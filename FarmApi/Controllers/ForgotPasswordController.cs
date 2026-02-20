@@ -43,14 +43,17 @@ namespace FarmApi.Controllers
 
         private string GenerateToken()
         {
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                var tokenBytes = new byte[32];
-                rng.GetBytes(tokenBytes);
-                return Convert.ToBase64String(tokenBytes);
-            }
+            using var rng = RandomNumberGenerator.Create();
+            var bytes = new byte[32];
+            rng.GetBytes(bytes);
+
+            return Convert.ToBase64String(bytes)
+                .Replace("+", "-")
+                .Replace("/", "_")
+                .Replace("=", "");
         }
-       
+
+
         private void SendEmail(string toEmail, string subject, string body)
         {
             try

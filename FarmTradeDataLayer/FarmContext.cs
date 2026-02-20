@@ -27,10 +27,11 @@ namespace FarmTradeDataLayer
         public DbSet<Order> orders { get; set; }
         public DbSet<OrderItem> orderItem { get; set; }
         public DbSet<Contact_us> Contact { get; set; }
+        public DbSet<OrderDetails> orderDetails { get; set; }
         // SQL Connection:
         protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
         {
-            dbContextOptionsBuilder.UseSqlServer("Server=IN-6YYZFY3;Database=Farmingproducts;User Id=sa;Password=Praveen0077$$$$;TrustServerCertificate=True;");
+            dbContextOptionsBuilder.UseSqlServer("Server=IN-6YYZFY3;Database=Last;User Id=sa;Password=Praveen0077$$$$;TrustServerCertificate=True;");
         }
         //protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
         //{

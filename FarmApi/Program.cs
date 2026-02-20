@@ -1,21 +1,18 @@
+using FarmApi;
 using FarmBusiness.Services;
 using FarmTradeDataLayer;
 using FarmTradeDataLayer.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
-using FarmApi.Model;
-using Microsoft.AspNetCore.Hosting;
-using FarmApi;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 string connectionStr = builder.Configuration.GetConnectionString("sqlConnection");
 builder.Services.AddDbContext<FarmContext>(options => options.UseSqlServer(connectionStr));
-
+builder.Services.AddDbContext<ContextFarmModel>(options => options.UseSqlServer(connectionStr));
 #region
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 builder.Services.AddAuthentication(options =>
@@ -24,13 +21,22 @@ builder.Services.AddAuthentication(options =>
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(options =>
 {
+    options.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
+        {
+            context.Token = context.Request.Cookies["access_token"];
+            return Task.CompletedTask;
+        }
+    };
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = false,
         ValidateAudience = false,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
         // ValidIssuer = jwtSettings["Issuer"],
         //ValidAudience = jwtSettings["Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]))

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FarmApi.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
@@ -58,12 +58,13 @@ namespace FarmApi.Controllers
         //public IActionResult AddProduct([FromBody] ProductCreationModel model)
         //{
         //    #region Adding Products
-        //    if (model == null || model.Product == null || model.ImageList == null || !model.ImageList.Any())
+        //    if (model == null || /*model.Product == null*/  model.ImageList == null || !model.ImageList.Any())
         //    {
         //        return BadRequest("Invalid product data or images.");
         //    }
         //    var imageBytesList = model.ImageList.Select(image => Convert.FromBase64String(image)).ToList();
         //    var result = _productService.AddProduct(model.Product, imageBytesList);
+
         //    if (result == "Product added successfully with multiple images")
         //    {
         //        return Ok(result);
@@ -74,12 +75,33 @@ namespace FarmApi.Controllers
         //    }
         //    #endregion
         //}
-
-        [AllowAnonymous]
-        [HttpGet("{productId}")]
-        public ActionResult<Product> GetProductWithReviews(int productId)
+        [AllowAnonymous] // for testing
+        [HttpPost("AddProduct")]
+        public IActionResult AddProduct([FromBody] ProductCreationModel model)
         {
-            var product = _productService.GetProductWithReviews(productId);
+            if (model == null ||
+                model.Product == null ||
+                model.ImageList == null ||
+                !model.ImageList.Any())
+            {
+                return BadRequest("Invalid product data or images.");
+            }
+
+            var imageBytesList = model.ImageList
+                .Select(image => Convert.FromBase64String(image))
+                .ToList();
+
+            var result = _productService.AddProduct(model.Product, imageBytesList);
+
+            return result.StartsWith("Product")
+                ? Ok(result)
+                : BadRequest(result);
+        }
+        [AllowAnonymous]
+        [HttpGet("GetProductWithReviews/{productId}")]
+        public async Task<ActionResult<Product>> GetProductWithReviews(int productId)
+        {
+            var product = await _productService.GetProductWithReviews(productId);
             if (product == null)
             {
                 return NotFound();

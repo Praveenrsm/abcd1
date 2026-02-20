@@ -49,9 +49,9 @@ namespace FarmBusiness.Services
         {
             return _cartRepo.GetCartDetails(id);
         }
-        public void UpdateQuantity(int productId,int Quantity,Guid? userId)
+        public void UpdateQuantity(int productId,Guid? userId,int Quantity)
         {
-            _cartRepo.UpdateQuantity(productId,Quantity,userId); 
+            _cartRepo.UpdateQuantity(productId, userId,Quantity); 
         }
     }
 }

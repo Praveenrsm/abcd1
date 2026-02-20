@@ -18,33 +18,52 @@ namespace FarmTradeDataLayer.Repository
 
         public string AddProduct(Product product, List<byte[]> imageList)
         {
-            var user = _farmcontext.users.FirstOrDefault(u => u.UserId == product.userId);
-            if (user == null)
-            {
-                return "User not found";
-            }
+            //var user = _farmcontext.users.FirstOrDefault(u => u.UserId == product.userId);
+            //if (user == null)
+            //{
+            //    return "User not found";
+            //}
 
-            if (user.role == "supplier" || user.role == "admin")
+            //if (user.role == "supplier" || user.role == "admin")
+            //{
+            //    // Process each image in the list, possibly resizing/compressing here
+            //    foreach (var imageData in imageList)
+            //    {
+            //        // Optionally, resize or compress the image data here before storing
+            //        var compressedImageData = CompressImage(imageData); // Implement a compression method
+
+            //        product.ProductImages.Add(new ProductImage { ImageData = compressedImageData,
+            //            Product = product
+            //        });
+            //    }
+
+            //    _farmcontext.product.Add(product);
+            //    _farmcontext.SaveChanges();
+
+            //    // Return a response with essential details only, excluding image data
+            //    return $"Product '{product.ProductName}' added successfully with {imageList.Count} images";
+            //}
+            //else
+            //{
+            //    return "You are not a Supplier/admin";
+            //}
+            if (product == null)
+                return "Invalid product";
+
+            foreach (var imageData in imageList)
             {
-                // Process each image in the list, possibly resizing/compressing here
-                foreach (var imageData in imageList)
+                var compressedImageData = CompressImage(imageData);
+
+                product.ProductImages.Add(new ProductImage
                 {
-                    // Optionally, resize or compress the image data here before storing
-                    var compressedImageData = CompressImage(imageData); // Implement a compression method
-
-                    product.ProductImages.Add(new ProductImage { ImageData = compressedImageData });
-                }
-
-                _farmcontext.product.Add(product);
-                _farmcontext.SaveChanges();
-
-                // Return a response with essential details only, excluding image data
-                return $"Product '{product.ProductName}' added successfully with {imageList.Count} images";
+                    ImageData = compressedImageData
+                });
             }
-            else
-            {
-                return "You are not a Supplier/admin";
-            }
+
+            _farmcontext.product.Add(product);
+            _farmcontext.SaveChanges();
+
+            return "Product added successfully with multiple images";
         }
 
         // Helper function to compress images (optional)
@@ -91,7 +110,7 @@ namespace FarmTradeDataLayer.Repository
         //    #endregion
         //}
 
-        public Product GetProductWithReviews(int productId)
+        public async Task<Product> GetProductWithReviews(int productId)
         {
             #region GET Single product 
             //var result = _farmcontext.product.Include(obj => obj.User).ToList();
@@ -100,7 +119,7 @@ namespace FarmTradeDataLayer.Repository
             //.Include(p => p.Reviews)
             //.ThenInclude(r => r.User)
             //.FirstOrDefault(p => p.ProductId == productId);
-                return _farmcontext.Set<Product>()
+                return await _farmcontext.Set<Product>()
                     .Where(p => p.ProductId == productId)
                     .Include(p => p.Reviews)
                     .ThenInclude(r => r.User)
@@ -120,14 +139,14 @@ namespace FarmTradeDataLayer.Repository
                             Id = r.Id,
                             Comments = r.Comments,
                             Rating = r.Rating,
-                            User = new User
+                            User = r.User == null ? null : new User
                             {
                                 UserName = r.User.UserName
                             }
                         }).ToList(),
-                        ProductImages = p.ProductImages.Where(r => r.ProductId == productId).ToList(),
+                        ProductImages = p.ProductImages.ToList(),
                     })
-                    .FirstOrDefault();
+                    .FirstOrDefaultAsync();
             #endregion
         }
 

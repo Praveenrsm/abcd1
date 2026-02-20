@@ -1,0 +1,22 @@
+.address-page {
+  padding: 20px;
+}
+
+.address-card {
+  display: flex;
+  gap: 10px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.place-order-btn {
+  margin-top: 20px;
+  padding: 12px 30px;
+  background-color: #fb641b;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}

@@ -29,21 +29,21 @@ namespace FarmApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
 
+                    b.Property<int>("AvailableQuantity")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("availableQuantity")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("productPrice")
+                    b.Property<decimal>("ProductPrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("ProductId");
 
-                    b.ToTable("product");
+                    b.ToTable("products");
                 });
 #pragma warning restore 612, 618
         }

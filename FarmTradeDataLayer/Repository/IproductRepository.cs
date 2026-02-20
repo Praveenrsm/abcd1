@@ -11,7 +11,7 @@ namespace FarmTradeDataLayer.Repository
     {
         void UpdateProduct(Product product, List<byte[]> imageList);
         string AddProduct(Product product, List<byte[]> imageList);
-        Product GetProductWithReviews(int productId);
+        Task<Product> GetProductWithReviews(int productId);
         IEnumerable<Product> GetAllProducts();
         void DeleteProduct(int productId);
     }

@@ -25,9 +25,9 @@ namespace FarmBusiness.Services
         {
             return _productRepository.AddProduct(product, imageList);
         }
-        public Product GetProductWithReviews(int productId)
+        public async Task<Product> GetProductWithReviews(int productId)
         {
-            return _productRepository.GetProductWithReviews(productId);
+            return await _productRepository.GetProductWithReviews(productId);
         }
         public IEnumerable<Product> GetAllProducts()
         {

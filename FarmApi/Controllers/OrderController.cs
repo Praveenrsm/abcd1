@@ -14,11 +14,54 @@ namespace FarmApi.Controllers
         {
             _orderService = orderService;
         }
-        [HttpPost("PlaceOrder")]
-        public IActionResult PlaceOrder(Guid userId, int adddress)
+
+        [HttpPut("CancelOrder")]
+        public IActionResult CancelOrder(int orderId)
         {
-            _orderService.PlaceOrder(userId, adddress);
-            return Ok("addedd and mailed success");
+            var claim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            if (claim == null)
+                return Unauthorized();
+
+            Guid userId = Guid.Parse(claim.Value);
+
+            _orderService.CancelOrder(orderId, userId);
+            return Ok(new { message = "Order cancelled successfully" });
         }
+
+        [HttpPost("PlaceOrder")]
+        public IActionResult PlaceOrder( int adddress)
+        {
+            var claim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+
+            if (claim == null)
+                return Unauthorized("Invalid or expired token");
+
+            Guid userId = Guid.Parse(claim.Value);
+
+            int orderId=_orderService.PlaceOrder(userId,adddress);
+            return Ok(new
+            {
+                OrderId = orderId,
+                message = "Order placed successfully"
+            });
+        }
+
+        [HttpGet("GetOrderDetails")]
+        public IActionResult GetOrderDetails(int orderId)
+        {
+            var claim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+
+            if (claim == null)
+                return Unauthorized("Invalid or expired token");
+
+            Guid userId = Guid.Parse(claim.Value); // ✅ NON-nullable
+            var result = _orderService.GetOrderDetails(orderId,userId);
+
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
+        }
+
     }
 }

@@ -1,0 +1,31 @@
+﻿<input type="text" id="username" placeholder="Your name">
+<input type="text" id="receiver" placeholder="Receiver name">
+<input type="text" id="message" placeholder="Message">
+<button id="sendButton">Send</button>
+
+<div id="chatBox"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js"></script>
+<script>
+    var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+    connection.start().then(function() {
+        console.log("Connected!");
+        var user = prompt("Enter your username (Alice, Bob, Charlie, Dave)");
+        document.getElementById("username").value = user;
+        connection.invoke("RegisterUser", user);
+    });
+
+    connection.on("ReceiveMessage", function(sender, message) {
+        var chatBox = document.getElementById("chatBox");
+        chatBox.innerHTML += `<p><strong>${sender}</strong>: ${message}</p>`;
+    });
+
+    document.getElementById("sendButton").addEventListener("click", function() {
+        var sender = document.getElementById("username").value;
+        var receiver = document.getElementById("receiver").value;
+        var message = document.getElementById("message").value;
+        connection.invoke("SendPrivateMessage", sender, receiver, message);
+        document.getElementById("message").value = "";
+    });
+</script>

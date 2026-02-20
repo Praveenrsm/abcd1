@@ -16,6 +16,7 @@ namespace FarmTradeEntity
         [ForeignKey("Product")]
         public int productId { get; set; }
         public Product product { get; set; }      // Foreign key to Product
+        public string ProductName { get; set; }
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal TotalPrice { get; set; }

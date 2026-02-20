@@ -1,10 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "WBA6AI5c9Gs=",
+  "dgSpecHash": "+wix1kDWr3o=",
   "success": true,
   "projectFilePath": "D:\\Projects\\FarmTrade\\mvc practice\\mvc practice.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\praveen.rajendran\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.21.0\\microsoft.visualstudio.azure.containers.tools.targets.1.21.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://nuget.optimizely.com/feed/v3/index.json."
+    }
+  ]
 }

@@ -18,7 +18,6 @@ namespace FarmTradeEntity
 
         public OrderStatus status { get; set; } = OrderStatus.confirmed;
         public string PaymentMethod { get; set; } = "Cash On Delivery";
-
         [ForeignKey("User")]
         public Guid userId { get; set; }
         public User user { get; set; }

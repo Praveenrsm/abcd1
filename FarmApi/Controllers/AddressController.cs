@@ -1,7 +1,7 @@
 ﻿using FarmBusiness.Services;
 using FarmTradeEntity;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace FarmApi.Controllers
 {
@@ -12,9 +12,15 @@ namespace FarmApi.Controllers
         private AddressService _addressService;
         public AddressController(AddressService addressService)=> _addressService = addressService;
         [HttpPost("AddAddress")]
-        public IActionResult AddAddress([FromBody]Address address)
+        public async Task<IActionResult> AddAddress([FromBody]Address address)
         {
-            _addressService.AddAddress(address);
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (userIdClaim == null)
+                return Unauthorized("Invalid or expired token");
+
+            var userId = Guid.Parse(userIdClaim.Value);
+            await _addressService.AddAddress(address,userId);
             return Ok("Address Added successfully");
         }
         [HttpPut("UpdateAddress")]
@@ -31,10 +37,15 @@ namespace FarmApi.Controllers
             #endregion
         }
         [HttpGet("GetAddresss")]
-        public IEnumerable<Address> GetAddress()
+        public ActionResult<IEnumerable<Address>> GetAddress()
         {
+            var claim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            if (claim == null)
+                return Unauthorized();
+
+            Guid userId = Guid.Parse(claim.Value);
             #region Get Address:
-            return _addressService.GetAddresses();
+            return Ok(_addressService.GetAddresses(userId));
             #endregion
         }
         [HttpDelete("DeleteAddress")]

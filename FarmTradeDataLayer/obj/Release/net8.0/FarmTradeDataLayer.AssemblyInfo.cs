@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FarmTradeDataLayer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dda02169f735fc9c7da1043dd2da3e33e82be4d8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ea9edf8e0355081fce205091b0a7efda796f834c")]
 [assembly: System.Reflection.AssemblyProductAttribute("FarmTradeDataLayer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FarmTradeDataLayer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

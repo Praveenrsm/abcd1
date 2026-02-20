@@ -1,7 +1,9 @@
 ﻿using FarmTradeEntity;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,7 +41,7 @@ namespace FarmTradeDataLayer.Repository
             var review = _farmcontext.ratingsreview
                 .FirstOrDefault(r => r.ProductId == productId && r.UserId == userId);
 
-            if (review != null)
+            if (review != null  )
             {
                 // Update the review
                 review.Comments = comments;
@@ -59,6 +61,11 @@ namespace FarmTradeDataLayer.Repository
             }
 
             _farmcontext.SaveChanges();
+        }
+
+        public async Task<IEnumerable<ReviewsAndRatings>> GetAllReview()
+        {
+            return await _farmcontext.ratingsreview.ToListAsync();
         }
 
     }

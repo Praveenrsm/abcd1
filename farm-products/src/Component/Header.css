@@ -1,0 +1,59 @@
+/* Header container */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  padding: 12px 24px;
+  background-color: #1f2937; /* dark slate */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Navigation */
+.header nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Links */
+.header a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Hover effect */
+.header a:hover {
+  background-color: #374151;
+  color: #fbbf24; /* golden highlight */
+}
+
+/* Cart badge look */
+.header a:first-child {
+  background-color: #111827;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .header {
+    justify-content: center;
+  }
+
+  .header nav {
+    gap: 14px;
+  }
+
+  .header a {
+    font-size: 14px;
+  }
+}

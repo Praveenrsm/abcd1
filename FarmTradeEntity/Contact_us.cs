@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace FarmTradeEntity
 {
+    [Table("Contact_us")]
     public class Contact_us
     {
         [Key]

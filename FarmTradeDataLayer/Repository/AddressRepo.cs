@@ -16,15 +16,19 @@ namespace FarmTradeDataLayer.Repository
         {
             _farmcontext = context;
         }
-        public void AddAddress(Address newAddress)
+        public async Task AddAddress(Address newAddress, Guid userId)
         {
-            var product = _farmcontext.users.FirstOrDefault(p => p.UserId == newAddress.userId);
-            _farmcontext.address.Add(newAddress);
-            _farmcontext.SaveChanges();
+            newAddress.userId = userId;
+            await _farmcontext.address.AddAsync(newAddress);
+            await _farmcontext.SaveChangesAsync();
         }
-        public IEnumerable<Address> GetAddress()
+        public IEnumerable<Address> GetAddress(Guid userId)
         {
-            return _farmcontext.address.Include(obj => obj.user).ToList();
+            return _farmcontext.address
+                .Where(a => a.userId == userId)  
+                .Include(a => a.user)
+                .AsNoTracking()
+                .ToList();
         }
         public void UpdateAddress(Address address)
         {
@@ -41,7 +45,7 @@ namespace FarmTradeDataLayer.Repository
             _farmcontext.SaveChanges();
             #endregion
         }
-        public Address GetAddressById(int id) 
+        public Address GetAddressById(int id)
         {
             var result=_farmcontext.address.Include(obj => obj.user).ToList();
             var address = result.Where(obj => obj.id == id).FirstOrDefault();

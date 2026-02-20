@@ -9,9 +9,11 @@ namespace FarmTradeDataLayer.Repository
 {
     public interface IOrderRepo
     {
-        void UpdateOrder(Order order);
+        void UpdateOrderStatus(int OrderId,OrderStatus orderStatus);
         Order AddOrder(Order order);
         Order GetOrderById(int orderId);
         IEnumerable<Order> GetOrders();
+        OrderDetails GetOrderDetails(int orderId,Guid userId);
+        void UpdateOrderStatus(int orderId, Guid userId, OrderStatus status);
     }
 }

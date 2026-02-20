@@ -14,17 +14,17 @@ namespace FarmBusiness.Services
         public AddressService(IAddressRepo addressRepo) {
             _addressRepo=addressRepo;
         }
-        public void AddAddress(Address address)
+        public async Task AddAddress(Address address,Guid userId)
         {
-            _addressRepo.AddAddress(address);
+            await _addressRepo.AddAddress(address,userId);
         }
         public void UpdateAddress(Address address)
         {
             _addressRepo.UpdateAddress(address);
         }
-        public IEnumerable<Address> GetAddresses() 
+        public IEnumerable<Address> GetAddresses(Guid userId) 
         {
-            return _addressRepo.GetAddress();
+            return _addressRepo.GetAddress(userId);
         }
         public void DeleteAddress(int addressId)
         {

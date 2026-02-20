@@ -1,0 +1,15 @@
+D:\Projects\FarmTrade\praveen\bin\Debug\net8.0\praveen.exe
+D:\Projects\FarmTrade\praveen\bin\Debug\net8.0\praveen.deps.json
+D:\Projects\FarmTrade\praveen\bin\Debug\net8.0\praveen.runtimeconfig.json
+D:\Projects\FarmTrade\praveen\bin\Debug\net8.0\praveen.dll
+D:\Projects\FarmTrade\praveen\bin\Debug\net8.0\praveen.pdb
+D:\Projects\FarmTrade\praveen\obj\Debug\net8.0\praveen.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\FarmTrade\praveen\obj\Debug\net8.0\praveen.AssemblyInfoInputs.cache
+D:\Projects\FarmTrade\praveen\obj\Debug\net8.0\praveen.AssemblyInfo.cs
+D:\Projects\FarmTrade\praveen\obj\Debug\net8.0\praveen.csproj.CoreCompileInputs.cache
+D:\Projects\FarmTrade\praveen\obj\Debug\net8.0\praveen.sourcelink.json
+D:\Projects\FarmTrade\praveen\obj\Debug\net8.0\praveen.dll
+D:\Projects\FarmTrade\praveen\obj\Debug\net8.0\refint\praveen.dll
+D:\Projects\FarmTrade\praveen\obj\Debug\net8.0\praveen.pdb
+D:\Projects\FarmTrade\praveen\obj\Debug\net8.0\praveen.genruntimeconfig.cache
+D:\Projects\FarmTrade\praveen\obj\Debug\net8.0\ref\praveen.dll

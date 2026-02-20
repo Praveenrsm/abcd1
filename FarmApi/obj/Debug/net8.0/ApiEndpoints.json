@@ -81,7 +81,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "user",
+        "Name": "request",
         "Type": "FarmTradeEntity.User",
         "IsRequired": true
       }
@@ -226,11 +226,6 @@
         "Name": "cart",
         "Type": "FarmTradeEntity.Cart",
         "IsRequired": true
-      },
-      {
-        "Name": "userId",
-        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -242,13 +237,7 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[FarmTradeEntity.Cart, FarmTradeEntity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
@@ -277,11 +266,6 @@
       {
         "Name": "quantity",
         "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "userId",
-        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       }
     ],
@@ -342,7 +326,7 @@
   {
     "ContainingType": "FarmApi.Controllers.DynamicProductController",
     "Method": "GetDynamicProductById",
-    "RelativePath": "api/DynamicProduct/GetDynamicProductById",
+    "RelativePath": "api/DynamicProduct/GetDynamicProductById/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -350,7 +334,7 @@
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -410,17 +394,44 @@
   },
   {
     "ContainingType": "FarmApi.Controllers.OrderController",
+    "Method": "CancelOrder",
+    "RelativePath": "api/Order/CancelOrder",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FarmApi.Controllers.OrderController",
+    "Method": "GetOrderDetails",
+    "RelativePath": "api/Order/GetOrderDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FarmApi.Controllers.OrderController",
     "Method": "PlaceOrder",
     "RelativePath": "api/Order/PlaceOrder",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.Guid",
-        "IsRequired": false
-      },
       {
         "Name": "adddress",
         "Type": "System.Int32",
@@ -431,29 +442,19 @@
   },
   {
     "ContainingType": "FarmApi.Controllers.ProductsController",
-    "Method": "GetProductWithReviews",
-    "RelativePath": "api/Products/{productId}",
-    "HttpMethod": "GET",
+    "Method": "AddProduct",
+    "RelativePath": "api/Products/AddProduct",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "productId",
-        "Type": "System.Int32",
+        "Name": "model",
+        "Type": "FarmApi.Model.ProductCreationModel",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "FarmTradeEntity.Product",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "FarmApi.Controllers.ProductsController",
@@ -492,6 +493,32 @@
     ]
   },
   {
+    "ContainingType": "FarmApi.Controllers.ProductsController",
+    "Method": "GetProductWithReviews",
+    "RelativePath": "api/Products/GetProductWithReviews/{productId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "FarmTradeEntity.Product",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "FarmApi.Controllers.RatingReviewController",
     "Method": "AddOrUpdateReview",
     "RelativePath": "api/RatingReview/AddOrUpdateReview",
@@ -502,11 +529,6 @@
       {
         "Name": "productId",
         "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "userId",
-        "Type": "System.Guid",
         "IsRequired": false
       },
       {
@@ -537,5 +559,25 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FarmApi.Controllers.RatingReviewController",
+    "Method": "GetAllReview",
+    "RelativePath": "api/RatingReview/GetAllReview",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FarmTradeEntity.ReviewsAndRatings, FarmTradeEntity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]

@@ -1,0 +1,33 @@
+[
+  {
+    "ContainingType": "SignalR.Controllers.SignalRController",
+    "Method": "SendMessage",
+    "RelativePath": "api/SignalR/send",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "message",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SignalR.Controllers.SignalRController",
+    "Method": "Test",
+    "RelativePath": "api/SignalR/test",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

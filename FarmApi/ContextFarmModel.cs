@@ -14,11 +14,11 @@ namespace FarmApi
         {
 
         }
-        public DbSet<Product1> product { get; set; }
+        public DbSet<Product1> products { get; set; }
         // SQL Connection:
         protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
         {
-            dbContextOptionsBuilder.UseSqlServer("Server=IN-6YYZFY3;Database=P1;User Id=sa;Password=Praveen0077$$$$;TrustServerCertificate=True;");
+            dbContextOptionsBuilder.UseSqlServer("Server=IN-6YYZFY3;Database=Products;User Id=sa;Password=Praveen0077$$$$;TrustServerCertificate=True;");
         }
     }
 }

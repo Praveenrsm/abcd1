@@ -81,7 +81,7 @@ namespace FarmTradeDataLayer.Repository
             return _farmcontext.cart.Where(c => c.sessionId == sessionId).Include(c => c.product).ToList();
         }
 
-        public void UpdateQuantity(int productId, int newQuantity,Guid? userId)
+        public void UpdateQuantity(int productId, Guid? userId,int newQuantity)
         {
            // Guid? userId = GetLoggedInUserId();
             Cart cartItem;
@@ -124,11 +124,11 @@ namespace FarmTradeDataLayer.Repository
             _farmcontext.SaveChanges();
         }
 
-        //private Guid? GetLoggedInUserId()
-        //{
-        //    var userIdClaim = _httpContextAccessor.HttpContext?.User?.FindFirst("UserId")?.Value;
-        //    return Guid.TryParse(userIdClaim, out var userId) ? userId : (Guid?)null;
-        //}
+        private Guid? GetLoggedInUserId()
+        {
+            var userIdClaim = _httpContextAccessor.HttpContext?.User?.FindFirst("UserId")?.Value;
+            return Guid.TryParse(userIdClaim, out var userId) ? userId : (Guid?)null;
+        }
 
         private Guid GetOrCreateSessionId()
         {

@@ -111,7 +111,7 @@ namespace FarmTradeDataLayer.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Contact");
+                    b.ToTable("Contact_us");
                 });
 
             modelBuilder.Entity("FarmTradeEntity.Order", b =>
@@ -146,6 +146,33 @@ namespace FarmTradeDataLayer.Migrations
                     b.ToTable("orders");
                 });
 
+            modelBuilder.Entity("FarmTradeEntity.OrderDetails", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
+
+                    b.Property<int?>("Addressid")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("GrandTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("Addressid");
+
+                    b.ToTable("orderDetails");
+                });
+
             modelBuilder.Entity("FarmTradeEntity.OrderItem", b =>
                 {
                     b.Property<int>("OrderItemId")
@@ -154,8 +181,14 @@ namespace FarmTradeDataLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderItemId"));
 
+                    b.Property<int?>("OrderDetailsOrderId")
+                        .HasColumnType("int");
+
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ProductName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -170,6 +203,8 @@ namespace FarmTradeDataLayer.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("OrderItemId");
+
+                    b.HasIndex("OrderDetailsOrderId");
 
                     b.HasIndex("OrderId");
 
@@ -198,7 +233,7 @@ namespace FarmTradeDataLayer.Migrations
                     b.Property<decimal>("productPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid>("userId")
+                    b.Property<Guid?>("userId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ProductId");
@@ -331,8 +366,21 @@ namespace FarmTradeDataLayer.Migrations
                     b.Navigation("user");
                 });
 
+            modelBuilder.Entity("FarmTradeEntity.OrderDetails", b =>
+                {
+                    b.HasOne("FarmTradeEntity.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("Addressid");
+
+                    b.Navigation("Address");
+                });
+
             modelBuilder.Entity("FarmTradeEntity.OrderItem", b =>
                 {
+                    b.HasOne("FarmTradeEntity.OrderDetails", null)
+                        .WithMany("Items")
+                        .HasForeignKey("OrderDetailsOrderId");
+
                     b.HasOne("FarmTradeEntity.Order", "Order")
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
@@ -354,9 +402,7 @@ namespace FarmTradeDataLayer.Migrations
                 {
                     b.HasOne("FarmTradeEntity.User", "User")
                         .WithMany()
-                        .HasForeignKey("userId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("userId");
 
                     b.Navigation("User");
                 });
@@ -394,6 +440,11 @@ namespace FarmTradeDataLayer.Migrations
             modelBuilder.Entity("FarmTradeEntity.Order", b =>
                 {
                     b.Navigation("OrderItems");
+                });
+
+            modelBuilder.Entity("FarmTradeEntity.OrderDetails", b =>
+                {
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("FarmTradeEntity.Product", b =>

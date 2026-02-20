@@ -25,5 +25,9 @@ namespace FarmBusiness.Services
         {
             _RatingAndReviewRepository.AddOrUpdateReview(productId, userId, comments,rating);
         }
+        public async Task<IEnumerable<ReviewsAndRatings>> GetAllReview()
+        {
+            return await _RatingAndReviewRepository.GetAllReview();
+        }
     }
 }
